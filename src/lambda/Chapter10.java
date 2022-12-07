@@ -1,7 +1,6 @@
 package lambda;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Chapter10 {
@@ -14,22 +13,19 @@ public class Chapter10 {
         list.add(new Task(LocalDate.of(2021, 8, 10), "散髪に行く", false));
         list.add(new Task(LocalDate.of(2021, 11, 9), "スクールの課題を解く", false));
         
-        List<Task> nodone = new ArrayList<>();
         
-        for (Task task : list) {
-        	if (!task.isDone()) {
-        		nodone.add(task);
-        	}
-        	
-        }
+        System.out.print("未完了のタスクの個数は");
+        long c1 = list.stream()
+        			  .filter(t -> !t.isDone())
+        			  .count();
+        System.out.println(c1);
         
-        Collections.sort(nodone);
-        
-        System.out.println("未完了のタスクの個数は" + nodone.size());
         System.out.println("【未完了のタスクを昇順に並び替えて一覧表示】");
-        for (Task a : nodone) {
-        	System.out.println(a);
-        }
+        
+        list.stream()
+        	.filter(t -> !t.isDone())
+        	.sorted()
+        	.forEach(System.out::println);
         
 	}
 
